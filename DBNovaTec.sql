@@ -1,11 +1,9 @@
 /*
-*	NovaTec
-*	IN5AM
-*  FILA 2
-*    FECHA DE CREACIÓN:
-*		05/07/2024
-*	FECHA DE MODIFICACIÓN
-*		09/07/2024
+	NovaTec
+	IN5AM
+    FILA 2
+    FECHA DE CREACIÓN:
+		05/07/2024
 */
 
 drop database if exists DBNovaTec;
@@ -81,7 +79,7 @@ Create table Productos (
   codigoTipoProducto int not null,
   codigoProveedor int not null,
   primary key PK_codigoProducto (codigoProducto),
-  constraint FK_Productos_Proveedores 
+  constraint FK_Productos_Proveedores
 	foreign key (codigoProveedor) references proveedores (codigoProveedor),
   constraint FK_Productos_TipoProducto 
 	foreign key (codigoTipoProducto) references TipoProducto (codigoTipoProducto)
@@ -94,9 +92,9 @@ Create table DetalleCompra (
   codigoProducto varchar(15) not null,
   numeroDocumento int not null,
   primary key PK_codigoDetalleCompra (codigoDetalleCompra),
-  constraint FK_DetalleCompra_Compras 
+  constraint FK_DetalleCompra_Compras
 	foreign key (numeroDocumento) references compras (numeroDocumento),
-  constraint FK_DetalleCompra_Productos 
+  constraint FK_DetalleCompra_Productos
 	foreign key (codigoProducto) references productos (codigoProducto)
 );
 
@@ -111,16 +109,19 @@ Create table EmailProveedor (
 );
 
 Create table Empleados (
-  codigoEmpleado int not null,
+  codigoEmpleado int not null auto_increment,
   nombresEmpleado varchar(50) not null,
   apellidosEmpleado varchar(50) not null,
+  DPIEmpleado varchar(15) not null,
   sueldo decimal(10,2) not null,
   direccionEmpleado varchar(150) not null,
+  usuario varchar (20) not null,
   turno varchar(15) not null,
   codigoCargoEmpleado int not null,
   primary key PK_codigoEmpleado (codigoEmpleado),
   constraint FK_Empleados_CargoEmpleado foreign key (codigoCargoEmpleado) references CargoEmpleado (codigoCargoEmpleado)
 );
+
 
 Create table Factura (
   numeroFactura int not null,
@@ -155,3 +156,18 @@ Create table DetalleCarrito (
   constraint FK_DetalleCarrito_Productos
 	foreign key (codigoProducto) references productos (codigoProducto)
 );
+
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_Password by 'admin';
+
+insert into CargoEmpleado(nombreCargo, descripcionCargo) values('Gerente de contabilidad','Supervisa la contabilidad');
+
+
+insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
+	values ('Sergio','Gomez','160624',12000,'zona 7','sgomez','Nocturno',1);
+insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
+	values ('Ricardo','Galindo','1234',12000,'zona 3','saurio','Nocturno',1);
+
+
+
+
+
