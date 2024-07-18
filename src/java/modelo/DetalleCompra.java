@@ -1,18 +1,17 @@
 
 package modelo;
 
-
 public class DetalleCompra {
     private int codigoDetalleCompra;
     private double costoUnitario;
     private int cantidad;
-    private int codigoProducto;
+    private String codigoProducto;
     private int numeroDocumento;
 
     public DetalleCompra() {
     }
 
-    public DetalleCompra(int codigoDetalleCompra, double costoUnitario, int cantidad, int codigoProducto, int numeroDocumento) {
+    public DetalleCompra(int codigoDetalleCompra, double costoUnitario, int cantidad, String codigoProducto, int numeroDocumento) {
         this.codigoDetalleCompra = codigoDetalleCompra;
         this.costoUnitario = costoUnitario;
         this.cantidad = cantidad;
@@ -44,11 +43,11 @@ public class DetalleCompra {
         this.cantidad = cantidad;
     }
 
-    public int getCodigoProducto() {
+    public String getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(int codigoProducto) {
+    public void setCodigoProducto(String codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
