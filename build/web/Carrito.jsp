@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Carrito
-    Created on : 11/07/2024, 09:57:05 PM
-    Author     : hgjua
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
