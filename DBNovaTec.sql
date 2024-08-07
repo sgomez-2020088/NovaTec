@@ -1,10 +1,4 @@
-/*
-	NovaTec
-	IN5AM
-    FILA 2
-    FECHA DE CREACIÓN:
-		05/07/2024
-*/
+
 
 drop database if exists DBNovaTec;
 create database DBNovaTec;
@@ -28,7 +22,7 @@ Create table Proveedores (
   paginaWeb varchar(50) not null,
   primary key PK_codigoProveedor (codigoProveedor)
 );
-
+ 
 Create table Compras (
   numeroDocumento int not null,
   fechaDocumento date not null,
@@ -36,6 +30,7 @@ Create table Compras (
   totalDocumento decimal(10,2) default 0.00,
   primary key PK_numeroDocumento (numeroDocumento)
 );
+
 
 Create table Clientes (
   codigoCliente int not null auto_increment,
@@ -45,8 +40,6 @@ Create table Clientes (
   direccionCliente varchar(150) not null,
   telefonoCliente varchar(8) not null,
   emailCliente varchar(100) not null,
-  username varchar(50) not null,
-  contrasena varchar(50) not null,
   primary key PK_codigoCliente (codigoCliente)
 );
 
@@ -159,15 +152,18 @@ Create table DetalleCarrito (
 
 alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_Password by 'admin';
 
+
+insert into TipoProducto(descripcion) values('Monitores');
+insert into TipoProducto(descripcion) values('Ordenadores');
+select * from TipoProducto;
+
+
 insert into CargoEmpleado(nombreCargo, descripcionCargo) values('Gerente de contabilidad','Supervisa la contabilidad');
 
 
 insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
-	values ('Sergio','Gomez','160624',12000,'zona 7','sgomez','Nocturno',1);
+	values ('Sergio','Gomez','123',12000,'zona 7','sgomez','Nocturno',1);
 insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
 	values ('Ricardo','Galindo','1234',12000,'zona 3','saurio','Nocturno',1);
-
-
-
 
 
