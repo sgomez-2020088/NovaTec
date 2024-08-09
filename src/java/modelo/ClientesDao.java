@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientesDao {
+public class ClientesDAO {
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
@@ -18,13 +18,13 @@ public class ClientesDao {
     
     public List listar(){
         String sql = "select * from clientes";
-        List<Clientes> listaClientes = new ArrayList<>();
+        List<Cliente> listaClientes = new ArrayList<>();
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                Clientes cl = new Clientes();
+                Cliente cl = new Cliente();
                 cl.setCodigoClientes(rs.getInt(1));
                 cl.setNITCliente(rs.getString(2));
                 cl.setNombresCliente(rs.getString(3));
@@ -32,8 +32,7 @@ public class ClientesDao {
                 cl.setDireccionCliente(rs.getString(5));
                 cl.setTelefonoCliente(rs.getString(6));
                 cl.setEmailCliente(rs.getString(7));
-                cl.setUsername(rs.getString(8));
-                cl.setContrasena(rs.getString(9));
+                listaClientes.add(cl);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,8 +41,8 @@ public class ClientesDao {
     }
     
     // Agregar 
-    public int agregar(Clientes clt){
-        String sql = "insert into Clientes (NITCliente, nombresCliente, apellidosCliente, direccionCliente, telefonoCliente, emailCliente, username, contrasena) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    public int agregar(Cliente clt){
+        String sql = "insert into Clientes (NITCliente, nombresCliente, apellidosCliente, direccionCliente, telefonoCliente, emailCliente) values (?, ?, ?, ?, ?, ?)";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -53,8 +52,7 @@ public class ClientesDao {
             ps.setString(4, clt.getDireccionCliente());
             ps.setString(5, clt.getTelefonoCliente());
             ps.setString(6, clt.getEmailCliente());
-            ps.setString(7, clt.getUsername());
-            ps.setString(8, clt.getContrasena());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,9 +61,9 @@ public class ClientesDao {
     
     // Buscar
     
-    public Clientes ListarCodigoClientes(int id){
-        Clientes clt = new Clientes();
-        String sql = "Select * from Clientes where codigoClientes ="+ id;
+    public Cliente ListarCodigoClientes(int id){
+        Cliente clt = new Cliente();
+        String sql = "Select * from Clientes where codigoCliente ="+ id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -77,8 +75,6 @@ public class ClientesDao {
                 clt.setDireccionCliente(rs.getString(5));
                 clt.setTelefonoCliente(rs.getString(6));
                 clt.setEmailCliente(rs.getString(7));
-                clt.setUsername(rs.getString(8));
-                clt.setContrasena(rs.getString(9));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,8 +84,8 @@ public class ClientesDao {
     
     //Actualizar
     
-    public int actualizar (Clientes clt){
-        String sql = "Update Clientes set NITCliente = ?, nombresCliente= ?, apellidosCliente= ?, direccionCliente= ?, telefonoCliente= ?, emailCliente= ?, username= ?, contrasena= ? where codigoCliente = ?";
+    public int actualizar (Cliente clt){
+        String sql = "Update Clientes set NITCliente = ?, nombresCliente= ?, apellidosCliente= ?, direccionCliente= ?, telefonoCliente= ?, emailCliente= ? where codigoCliente = ?";
         try {
             con= cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -99,8 +95,7 @@ public class ClientesDao {
             ps.setString(4, clt.getDireccionCliente());
             ps.setString(5, clt.getTelefonoCliente());
             ps.setString(6, clt.getEmailCliente());
-            ps.setString(7, clt.getUsername());
-            ps.setString(8, clt.getContrasena());
+            ps.setInt(7, clt.getCodigoClientes());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +105,7 @@ public class ClientesDao {
     
     // Eliminar
     public void eliminar (int id){
-        String sql = "delete from clientes where codigoClientes ="+ id;
+        String sql = "delete from clientes where codigoCliente ="+ id;
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
