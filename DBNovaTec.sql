@@ -22,7 +22,7 @@ Create table Proveedores (
   paginaWeb varchar(50) not null,
   primary key PK_codigoProveedor (codigoProveedor)
 );
- 
+
 Create table Compras (
   numeroDocumento int not null,
   fechaDocumento date not null,
@@ -156,8 +156,11 @@ alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_Password by 'admin';
 insert into TipoProducto(descripcion) values('Monitores');
 insert into TipoProducto(descripcion) values('Ordenadores');
 select * from TipoProducto;
+select * from proveedores;
 
 
+
+select * from emailProveedor;
 insert into CargoEmpleado(nombreCargo, descripcionCargo) values('Gerente de contabilidad','Supervisa la contabilidad');
 
 

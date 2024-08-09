@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/TelefonoProveedor.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Carrito.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/DetalleCarrito.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/TipoProducto.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Clientes.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Empleados.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/CargoEmpleado.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Factura.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/EmailProveedor.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Producto.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Principal.jsp</file>
-            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/NOVATEC/web/Compra.jsp</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/src/java/modelo/EmailProveedorDAO.java</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/web/Principal.jsp</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/src/java/modelo/EmailProveedor.java</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/src/java/modelo/ProveedoresDAO.java</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/src/java/controlador/Controlador.java</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/web/EmailProveedor.jsp</file>
+            <file>file:/F:/JAVA%202024/BIM%204/SEMANA%202/07.08.2024/NOVATEC/web/Proveedores.jsp</file>
         </group>
     </open-files>
 </project-private>

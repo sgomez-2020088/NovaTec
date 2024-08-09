@@ -13,8 +13,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.EmailProveedor;
+import modelo.EmailProveedorDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
+import modelo.Proveedores;
+import modelo.ProveedoresDAO;
 import modelo.TipoProducto;
 import modelo.TipoProductoDAO;
 
@@ -27,7 +31,11 @@ public class Controlador extends HttpServlet {
     EmpleadoDAO empleadoDao = new EmpleadoDAO();
     TipoProducto tipoProducto = new TipoProducto();
     TipoProductoDAO tipoProductoDao = new TipoProductoDAO();
-    int codTipoProducto;
+    Proveedores proveedores = new Proveedores();
+    ProveedoresDAO proveedoresDao = new ProveedoresDAO();
+    EmailProveedor emailProveedor = new EmailProveedor();
+    EmailProveedorDAO emailProveedorDao = new EmailProveedorDAO();
+    int codTipoProducto, codProveedores, codEmailProveedor;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,14 +53,12 @@ public class Controlador extends HttpServlet {
         if(menu.equals("Principal")){
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }else if(menu.equals("TipoProducto")) {
-            
-            
             switch(accion){
                 case"Listar":
                     List listaTipoProductos = tipoProductoDao.listar();
                     request.setAttribute("tipoProductos", listaTipoProductos);
                 break;
-                case "Agregar":
+            case "Agregar":
                     String descripcion = request.getParameter("txtDescripcion");
                     tipoProducto.setDescripcion(descripcion);
                     tipoProductoDao.agregar(tipoProducto);
@@ -65,39 +71,76 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=TipoProducto&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
-                    String descrip = request.getParameter("txtDescripcion");
-                    tipoProducto.setDescripcion(descrip);
+                    String descripcionTp = request.getParameter("txtDescripcion");
+                    tipoProducto.setDescripcion(descripcionTp);
+                    tipoProducto.setCodigoTipoProducto(codTipoProducto);
                     tipoProductoDao.actualizar(tipoProducto);
-                    request.getRequestDispatcher("Controlador?menu=TipoProdudcto&accion=Listar").forward(request, response);
+                    request.getRequestDispatcher("Controlador?menu=TipoProducto&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
                     codTipoProducto = Integer.parseInt(request.getParameter("codigoTipoProducto"));
                     tipoProductoDao.eliminar(codTipoProducto);
                     request.getRequestDispatcher("Controlador?menu=TipoProducto&accion=Listar").forward(request, response);
                     break;
+            }request.getRequestDispatcher("TipoProducto.jsp").forward(request, response);
+        }//----------------------------------------PROVEEDORES------------------------------------------------------- 
+        else if(menu.equals("Proveedores")) {
+            switch(accion){
+                case"Listar":
+                    List listaProveedoress = proveedoresDao.listar();
+                    request.setAttribute("proveedoress", listaProveedoress);
+                break;
+            case "Agregar":
+                    String NITProveedor = request.getParameter("txtNITProveedor");
+                    String NombresProveedor = request.getParameter("txtNombresProveedor");
+                    String ApellidosProveedor = request.getParameter("txtApellidosProveedor");
+                    String DireccionProveedor = request.getParameter("txtDireccionProveedor");
+                    String RazonSocial = request.getParameter("txtRazonSocial");
+                    String ContactoPrincipal = request.getParameter("txtContactoPrincipal");
+                    String paginaWeb = request.getParameter("txtPaginaWeb");
+                    
+                    proveedores.setNITProveedor(NITProveedor);
+                    proveedores.setNombresProveedor(NombresProveedor);
+                    proveedores.setApellidosProveedor(ApellidosProveedor);
+                    proveedores.setDireccionProveedor(DireccionProveedor);
+                    proveedores.setRazonSocial(RazonSocial);
+                    proveedores.setContactoPrincipal(ContactoPrincipal);
+                    proveedores.setPaginaWeb(paginaWeb);
+                    proveedoresDao.agregar(proveedores);
+                    request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    Proveedores p = proveedoresDao.listarCodigoProveedores(codProveedores);
+                    request.setAttribute("proveedores", p);
+                    request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String NITProv = request.getParameter("txtNITProveedor");
+                    String nombresProv = request.getParameter("txtNombresProveedor");
+                    String apellidosProv = request.getParameter("txtApellidosProveedor");
+                    String direccionProv = request.getParameter("txtDireccionProveedor");
+                    String razonSocialProv = request.getParameter("txtRazonSocial");
+                    String contactoPrincipalProv = request.getParameter("txtContactoPrincipal");
+                    String paginaWebProv = request.getParameter("txtPaginaWeb");
+                    proveedores.setNITProveedor(NITProv);
+                    proveedores.setNombresProveedor(nombresProv);
+                    proveedores.setApellidosProveedor(apellidosProv);
+                    proveedores.setDireccionProveedor(direccionProv);
+                    proveedores.setRazonSocial(razonSocialProv);
+                    proveedores.setContactoPrincipal(contactoPrincipalProv);
+                    proveedores.setPaginaWeb(paginaWebProv); 
+                    proveedores.setCodigoProveedor(codProveedores);
+                    proveedoresDao.agregar(proveedores);
+                    request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codProveedores = Integer.parseInt(request.getParameter("codigoProveedor"));
+                    proveedoresDao.eliminar(codProveedores);
+                    request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request, response);
+                    break;
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            request.getRequestDispatcher("TipoProducto.jsp").forward(request, response);
-        } else if(menu.equals("Proveedores")) {
             request.getRequestDispatcher("Proveedores.jsp").forward(request, response);
         }else if(menu.equals("Compra")) {
             request.getRequestDispatcher("Compra.jsp").forward(request, response);
@@ -112,6 +155,49 @@ public class Controlador extends HttpServlet {
         }else if(menu.equals("DetalleCarrito")) {
             request.getRequestDispatcher("DetalleCarrito.jsp").forward(request, response);
         }else if(menu.equals("EmailProveedor")) {
+            switch(accion){
+                case"Listar":
+                    List listaEmailProveedores = emailProveedorDao.listar();
+                    request.setAttribute("emailProveedores", listaEmailProveedores);
+                break;
+            case "Agregar":
+                    String EmailProveedor = request.getParameter("txtEmailProveedor");
+                    String Descripcion = request.getParameter("txtDescripcion");
+                    int CodigoProveedor = Integer.parseInt(request.getParameter("txtCodigoProveedor"));
+                    
+                    emailProveedor.setEmailProveedor(EmailProveedor);
+                    emailProveedor.setDescripcion(Descripcion);
+                    emailProveedor.setCodigoProveedor(CodigoProveedor);
+                    emailProveedorDao.agregar(emailProveedor);
+                    request.getRequestDispatcher("Controlador?menu=EmailProveedor&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codEmailProveedor = Integer.parseInt(request.getParameter("codigoEmailProveedor"));
+                    EmailProveedor ep = emailProveedorDao.listarCodigoEmailProveedor(codEmailProveedor);
+                    request.setAttribute("emailProveedor", ep);
+                    request.getRequestDispatcher("Controlador?menu=EmailProveedor&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                     String EmailProv = request.getParameter("txtEmailProveedor");
+                    String descripEmailProv = request.getParameter("txtDescripcion");
+                    int codProv = Integer.parseInt(request.getParameter("txtCodigoProveedor"));
+                    emailProveedor.setEmailProveedor(EmailProv);
+                    emailProveedor.setDescripcion(descripEmailProv);
+                    emailProveedor.setCodigoProveedor(codProv);
+                    emailProveedor.setCodigoEmailProveedor(codEmailProveedor);
+                    emailProveedorDao.actualizar(emailProveedor);
+                    request.getRequestDispatcher("Controlador?menu=EmailProveedor&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codEmailProveedor = Integer.parseInt(request.getParameter("codigoEmailProveedor"));
+                    emailProveedorDao.eliminar(codEmailProveedor);
+                    request.getRequestDispatcher("Controlador?menu=EmailProveedor&accion=Listar").forward(request, response);
+                    break;
+            }
+            
+            
+            
+            
             request.getRequestDispatcher("EmailProveedor.jsp").forward(request, response);
         }else if(menu.equals("Empleados")) {
             request.getRequestDispatcher("Empleados.jsp").forward(request, response);
@@ -123,13 +209,6 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Carrito.jsp").forward(request, response);
         }
         
-//        
-        
-//        } else if(menu.equals("Producto")) {
-////            request.getRequestDispatcher("Producto.jsp").forward(request, response);
-////        } else if(menu.equals("NuevaVenta")) {
-////          quest.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

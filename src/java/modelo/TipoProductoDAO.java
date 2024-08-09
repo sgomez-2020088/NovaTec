@@ -2,11 +2,16 @@
 package modelo;
 
 import config.Conexion;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 
 public class TipoProductoDAO {
@@ -41,14 +46,14 @@ public class TipoProductoDAO {
     }
     
     //Agregar
-    public int agregar(TipoProducto tp){
-        String sql = "insert into TipoProducto (descripcion) values (?)";
+    
+    public int agregar(TipoProducto tip){
+        String sql = "insert into TipoProducto (Descripcion) values (?)";
         
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, tp.getCodigoTipoProducto());
-            ps.setString(2, tp.getDescripcion());
+            ps.setString(1, tip.getDescripcion());
             ps.executeUpdate();
         } catch(Exception e) {
             e.printStackTrace();
@@ -59,7 +64,7 @@ public class TipoProductoDAO {
     // buscar por código
     
     public TipoProducto listarCodigoTipoProducto(int id){
-        TipoProducto tp = new TipoProducto();
+        TipoProducto tip = new TipoProducto();
         
         String sql = "select * from TipoProducto where codigoTipoProducto =" +id;
         
@@ -68,24 +73,23 @@ public class TipoProductoDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
-                tp.setCodigoTipoProducto(rs.getInt(1));
-                tp.setDescripcion(rs.getString(2));
+                tip.setDescripcion(rs.getString(2));
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return tp;
+        return tip;
     }
     
     // Método Editar
     
-    public int actualizar(TipoProducto tp) {
+    public int actualizar(TipoProducto tip) {
         String sql = "Update TipoProducto set descripcion = ? where codigoTipoProducto = ?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setString(1, tp.getDescripcion());
-            ps.setInt(2, tp.getCodigoTipoProducto());
+            ps.setString(1, tip.getDescripcion());
+            ps.setInt(2, tip.getCodigoTipoProducto());
             ps.executeUpdate();
         } catch(Exception e) {
             e.printStackTrace();
