@@ -78,7 +78,6 @@ public class DetalleCompraDAO {
     }
     
     // Editar 
-    
     public int actualizar (DetalleCompra dtc){
         String sql = "Update DetalleCompra set costoUnitario = ?, cantidad = ? where codigoDetalleCompra = ?";
         try{

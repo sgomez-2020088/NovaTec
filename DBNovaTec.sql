@@ -65,8 +65,6 @@ Create table Productos (
   codigoProducto varchar(15) not null,
   descripcionProducto varchar(45) not null,
   precioUnitario decimal(10,2) default 0.00,
-  precioDocena decimal(10,2) default 0.00,
-  precioMayor decimal(10,2) default 0.00,
   imagenProducto longblob,
   existencia int default 0,
   codigoTipoProducto int not null,
@@ -110,6 +108,7 @@ Create table Empleados (
   direccionEmpleado varchar(150) not null,
   usuario varchar (20) not null,
   turno varchar(15) not null,
+  imgEmpleado longblob,
   codigoCargoEmpleado int not null,
   primary key PK_codigoEmpleado (codigoEmpleado),
   constraint FK_Empleados_CargoEmpleado foreign key (codigoCargoEmpleado) references CargoEmpleado (codigoCargoEmpleado)
@@ -153,21 +152,42 @@ Create table DetalleCarrito (
 alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_Password by 'admin';
 
 
-insert into TipoProducto(descripcion) values('Monitores');
-insert into TipoProducto(descripcion) values('Ordenadores');
 select * from TipoProducto;
 select * from proveedores;
 select * from empleados;
-
-
-
+select * from detalleCompra;
+select * from Productos;
+select * from Compras;
+select * from CargoEmpleado;
 select * from emailProveedor;
+select * from clientes;
+
+
+
 insert into CargoEmpleado(nombreCargo, descripcionCargo) values('Gerente de contabilidad','Supervisa la contabilidad');
 
+insert into CargoEmpleado(nombreCargo, descripcionCargo) values('prueba','preba2');
 
 insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
 	values ('Sergio','Gomez','123',12000,'zona 7','sgomez','Nocturno',1);
+    insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
+	values ('Dilan','Rodas','123',12000,'zona 7','drodas','Nocturno',2);
 insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
 	values ('Ricardo','Galindo','1234',12000,'zona 3','saurio','Nocturno',1);
+    insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
+	values ('Ricardo','Galindo','123',12000,'zona 3','yo','Nocturno',1);
+    
+ update Empleados set nombresEmpleado = 's', apellidosEmpleado = 's', DPIEmpleado = 1, sueldo = 1, direccionEmpleado = '1', usuario = '1', turno = '1' where codigoEmpleado = 4;  
+    
+    
+    insert into TipoProducto(descripcion) values('Monitores');
+insert into TipoProducto(descripcion) values('Ordenadores');
+
+
+
+insert into Productos(codigoProducto, descripcionProducto, precioUnitario, imagenProducto, existencia,codigoTipoProducto,codigoProveedor) values ('COD01','noHay',100,'',2,1,1);
+insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(123,2,'COD01',2024001);
+insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(252,13,'COD01',2024001);
+
 
 

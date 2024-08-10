@@ -16,59 +16,65 @@ public class CargoEmpleadoDAO {
     int resp;
     //Elementos del CRUD
     public List listar(){
-        String sql = "select * from cargoEmpleado";
+        String sql = "select * from CargoEmpleado";
         List<CargoEmpleado> listaCargoEmpleado = new ArrayList<>();
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                CargoEmpleado cargoEmpleado = new CargoEmpleado();
-                cargoEmpleado.setCodigoCargoEmpleado(rs.getInt(1));
-                cargoEmpleado.setDescripcionCargo(rs.getString(2));
-                cargoEmpleado.setNombreCargo(rs.getString(3));
-                listaCargoEmpleado.add(cargoEmpleado);
+                CargoEmpleado ce = new CargoEmpleado();
+                ce.setCodigoCargoEmpleado(rs.getInt(1));
+                ce.setNombreCargo(rs.getString(2));
+                ce.setDescripcionCargo(rs.getString(3));
+                listaCargoEmpleado.add(ce);
             }
         }catch(Exception e){
             e.printStackTrace();
         }
         return listaCargoEmpleado;
     }
-    public int agregar(CargoEmpleado cargoEmpleado){
-        String sql = "insert into CargoEmpleado(nombreCargo, descripcionCargo) values(?,?)";
+    
+    
+    public int agregar(CargoEmpleado cae){
+        String sql = "insert into CargoEmpleado (nombreCargo,descripcionCargo) values (?,?)";
+        
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setString(1, cargoEmpleado.getDescripcionCargo());
-            ps.setString(2, cargoEmpleado.getNombreCargo());
-        }catch(Exception e){
+            ps.setString(1, cae.getNombreCargo());
+            ps.setString(2, cae.getDescripcionCargo());
+            ps.executeUpdate();
+        } catch(Exception e) {
             e.printStackTrace();
         }
         return resp;
     }
+    
     public CargoEmpleado listarCodigoCargoEmpleado(int id){
-        CargoEmpleado cargoEmpleado = new CargoEmpleado();
+        CargoEmpleado cae = new CargoEmpleado();
         String sql = "select * from CargoEmpleado where codigoCargoEmpleado =" + id;
         try{
             con  = cn.Conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                cargoEmpleado.setDescripcionCargo(rs.getString(2));
-                cargoEmpleado.setNombreCargo(rs.getString(3));
+                cae.setNombreCargo(rs.getString(2));
+                cae.setDescripcionCargo(rs.getString(3));
+
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-        return cargoEmpleado;
+        return cae;
     }
     public int actualizar(CargoEmpleado cargo){
         String sql = "Update cargoEmpleado set descripcionCargo = ?, nombreCargo = ? where codigoCargoEmpleado = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setString(1, cargo.getDescripcionCargo());
-            ps.setString(2, cargo.getNombreCargo());
+            ps.setString(1, cargo.getNombreCargo());
+            ps.setString(2, cargo.getDescripcionCargo());
             ps.setInt(3, cargo.getCodigoCargoEmpleado());
             ps.executeUpdate();
         }catch(Exception e){
@@ -77,13 +83,16 @@ public class CargoEmpleadoDAO {
         return resp;
     }
     public void eliminar(int id){
-        String sql = "delete from cargoEmpleado where codigoCargoEmpleado =" + id;
+        String sql = "delete from CargoEmpleado where codigoCargoEmpleado =" + id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.executeQuery();
+            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+    
+    
+    
 }
