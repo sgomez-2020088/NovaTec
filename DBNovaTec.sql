@@ -157,6 +157,7 @@ insert into TipoProducto(descripcion) values('Monitores');
 insert into TipoProducto(descripcion) values('Ordenadores');
 select * from TipoProducto;
 select * from proveedores;
+select * from empleados;
 
 
 

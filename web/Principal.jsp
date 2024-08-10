@@ -62,7 +62,7 @@
                     
                 </ul>
             </div> 
-            <div class="dropdown">
+            <div class="btn dropleft">
                 <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ${usuario.getNombresEmpleado()}
                 </button>
