@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.CargoEmpleado;
+import modelo.CargoEmpleadoDAO;
 import modelo.Cliente;
 import modelo.ClientesDAO;
 import modelo.Compra;
@@ -47,6 +49,8 @@ public class Controlador extends HttpServlet {
     ClientesDAO clientesDao = new ClientesDAO();
     Compra compra = new Compra();
     CompraDAO compraDao = new CompraDAO();
+    CargoEmpleado cargoEmpleado = new CargoEmpleado();
+    CargoEmpleadoDAO cargoEmpleadoDao = new CargoEmpleadoDAO();
     int numeroDocumento;
     int codTipoProducto, codProveedores, codEmailProveedor, codTelefonoProveedor; 
     int codClientes;
@@ -145,7 +149,7 @@ public class Controlador extends HttpServlet {
                     proveedores.setContactoPrincipal(contactoPrincipalProv);
                     proveedores.setPaginaWeb(paginaWebProv); 
                     proveedores.setCodigoProveedor(codProveedores);
-                    proveedoresDao.agregar(proveedores);
+                    proveedoresDao.actualizar(proveedores);
                     request.getRequestDispatcher("Controlador?menu=Proveedores&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
@@ -349,6 +353,8 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("DetalleCarrito.jsp").forward(request, response);
         }else if(menu.equals("Carrito")) {
             request.getRequestDispatcher("Carrito.jsp").forward(request, response);
+        }else if(menu.equals("DetalleCompra")) {
+            request.getRequestDispatcher("DetalleCompra.jsp").forward(request, response);
         }
         
     }

@@ -20,15 +20,17 @@
                     <li class="nav-item active">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Home</a> 
                     </li>
-                    <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=TipoProducto&accion=Listar" target="myFrame">Tipo Producto</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar" target="myFrame">Proveedores</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Compra&accion=Listar" target="myFrame">Compras</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=TelefonoProveedor&accion=Listar" target="myFrame">Tel.Proveedor</a>
                     </li>
+                    <li class="nav-item">
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=EmailProveedor&accion=Listar" target="myFrame">Email Prov</a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="myFrame">Clientes</a>
                     </li>
@@ -36,7 +38,10 @@
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=CargoEmpleado&accion=Listar" target="myFrame">Cargo Empleado</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=TelefonoProveedor&accion=Listar" target="myFrame">Tel.Proveedor</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Empleados&accion=Listar" target="myFrame">Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=TipoProducto&accion=Listar" target="myFrame">Tipo Producto</a>
                     </li>
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Producto&accion=Listar" target="myFrame">Productos</a>
@@ -45,11 +50,10 @@
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=DetalleCompra&accion=Listar" target="myFrame">Det. Compra</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=EmailProveedor&accion=Listar" target="myFrame">Email Prov</a>
+                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Compra&accion=Listar" target="myFrame">Compras</a>
                     </li>
-                    <li class="nav-item">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Empleados&accion=Listar" target="myFrame">Empleados</a>
-                    </li>
+                   
+                    
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame">Factura</a>
                     </li>

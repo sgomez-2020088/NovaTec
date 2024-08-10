@@ -13,10 +13,7 @@
         <div class="card col-sm-4">
             <div class="card-body"> 
                 <form action="Controlador?menu=Proveedores" method="POST">
-                    <div class="form-group">
-                        <label><strong>Codigo:</strong></label>
-                        <input type="text" value="${proveedores.getCodigoProveedor()}" name="txtCodigoProveedor" class="form-control">
-                    </div>
+
                     <div class="form-group">
                         <label><strong>NIT:</strong></label>
                         <input type="text" value="${proveedores.getNITProveedor()}" name="txtNITProveedor" class="form-control">
@@ -50,7 +47,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <table class="table table-hover">
                 <thead>
                     <tr>
