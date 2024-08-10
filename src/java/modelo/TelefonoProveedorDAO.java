@@ -26,7 +26,7 @@ public class TelefonoProveedorDAO {
             rs = ps.executeQuery();
             while(rs.next()){
                 TelefonoProveedor tp = new TelefonoProveedor();
-                tp.setCodigoProveedor(rs.getInt(1));
+                tp.setCodigoTelefonoProveedor(rs.getInt(1));
                 tp.setNumeroPrincipal(rs.getString(2));
                 tp.setNumeroSecundario(rs.getString(3));
                 tp.setObservaciones(rs.getString(4));
@@ -43,14 +43,14 @@ public class TelefonoProveedorDAO {
     //Agregar
     
     public int agregar(TelefonoProveedor tlp){
-        String sql = "insert into TelefonoProveedor (numeroPrincipal, numeroSecundario, obaservaciones, codigoProveedor) values (?,?,?,?);";
+        String sql = "insert into TelefonoProveedor (numeroPrincipal, numeroSecundario, observaciones, codigoProveedor) values (?,?,?,?)";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             ps.setString(1, tlp.getNumeroPrincipal());
             ps.setString(2, tlp.getNumeroSecundario());
             ps.setString(3, tlp.getObservaciones());
-            ps.setInt(4, tlp.getCodigoTelefonoProveedor());
+            ps.setInt(4, tlp.getCodigoProveedor());
             ps.executeUpdate();
         } catch (Exception e){
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class TelefonoProveedorDAO {
     }
     
     //Buscar
-    public  TelefonoProveedor listarCodigoTelefonoProveedor(int id){
+    public TelefonoProveedor listarCodigoTelefonoProveedor(int id){
         TelefonoProveedor tlp = new TelefonoProveedor();
         String sql = "select * from TelefonoProveedor where codigoTelefonoProveedor =" + id;
         try{
@@ -80,7 +80,7 @@ public class TelefonoProveedorDAO {
     
     //Actualizar
     public int actualizar(TelefonoProveedor tlp){
-        String sql = "Update TelefonoProveedor set numeroPrincipal = ?, numeroSecundario = ?, observaciones = ? where codigoProveedor = ?";
+        String sql = "Update TelefonoProveedor set numeroPrincipal = ?, numeroSecundario = ?, observaciones = ? where codigoTelefonoProveedor = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -108,3 +108,4 @@ public class TelefonoProveedorDAO {
         }
     }
 } 
+

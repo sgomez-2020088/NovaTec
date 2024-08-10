@@ -1,0 +1,119 @@
+body {
+    padding-top: 20px;
+    background-image: url('img/fondoEntidad.png'); 
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff; 
+}
+
+.card {
+    background-color: rgba(0, 0,0, 0.5); 
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    margin: 10px;
+    padding: 20px;
+}
+
+
+.form-group label {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.form-control {
+    border-radius: 10px; 
+    background-color: #f8f9fa; 
+    color: #000;
+}
+
+.btn-info, .btn-success {
+    border-radius: 20px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    transition: background-color 2s ease; 
+}
+
+.btn-info:hover {
+    background-color: #17a2b8;
+}
+
+.btn-success:hover {
+    background-color: #28a745; 
+}
+
+.table {
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px; 
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #ffc500; 
+    color: #ffffff;
+    border: none;
+   
+    padding: 14px;
+   
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    border: none;
+}
+
+
+.btn-warning, .btn-danger {
+    border-radius: 10px; 
+    padding: 5px 15px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #ffc107; 
+}
+
+.btn-danger:hover {
+    background-color: #dc3545; 
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

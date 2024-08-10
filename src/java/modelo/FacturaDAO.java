@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 public class FacturaDAO {
@@ -15,11 +14,11 @@ public class FacturaDAO {
     ResultSet rs;
     int resp;
     
-    //Elementos Del CRUD
-    //Método listar
+    //Elementos del CRUD
+    //MÉTODO LISTAR
     public List listar(){
-        String sql = "Select * from factura";
-        List<Factura> listaFactura = new ArrayList<>();
+        String sql = "Select * from Factura";
+        List<Factura> listaFactura = new ArrayList();
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -29,87 +28,88 @@ public class FacturaDAO {
                 fc.setNumeroFactura(rs.getInt(1));
                 fc.setEstado(rs.getString(2));
                 fc.setTotalFactura(rs.getDouble(3));
-                fc.setFechaFactura(rs.getDate(4));
+                fc.setFechaFactura(rs.getString(4));
                 fc.setCodigoCliente(rs.getInt(5));
                 fc.setCodigoEmpleado(rs.getInt(6));
                 listaFactura.add(fc);
             }
-                    
-        }catch (Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }
-        
         return listaFactura;
     }
-
-    //Método Agregar
-    public int agregar(Factura fc){
-        String sql = "insert into Factura(numeroFactura, estado, totalFactura, fechaFactura, codigoCliente, codigoEmpleado) values(?, ?, ?, ?, ?, ?)";
+    
+    //MÉTODO AGREGAR
+    public int agregar(Factura fact){
+        String sql ="insert into Factura (numeroFactura, estado, totalFactura, fechaFactura, codigoCliente, codigoEmpleado)" +
+        "values (?,?,?,?,?,?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setInt(1,fc.getNumeroFactura());
-            ps.setString(2,fc.getEstado());
-            ps.setDouble(3,fc.getTotalFactura());
-            ps.setDate(4,(Date) fc.getFechaFactura());
-            ps.setInt(5,fc.getCodigoCliente());
-            ps.setInt(6,fc.getCodigoEmpleado());
+            ps.setInt(1, fact.getNumeroFactura());
+            ps.setString(2, fact.getEstado());
+            ps.setDouble(3, fact.getTotalFactura());
+            ps.setString(4, fact.getFechaFactura());
+            ps.setInt(5, fact.getCodigoCliente());
+            ps.setInt(6, fact.getCodigoEmpleado());
             ps.executeUpdate();
-        } catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }
         return resp;
     }
     
-    //Buscar por código
-    public Factura listarNumeroFactura (int numFactura){
-        Factura fc = new Factura();
-        String sql = "Select * from Factura where numeroFactura = " + numFactura;
+    //MÉTODO BUSCAR POR CÓDIGO
+    public Factura listarFacturaPorCodigo (int id){
+        Factura f = new Factura();
+        String sql = "Select * from Factura where numeroFactura ="+id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()){
-                fc.setEstado(rs.getString(2));
-                fc.setTotalFactura(rs.getDouble(3));
-                fc.setFechaFactura(rs.getDate(4));
-                fc.setCodigoCliente(rs.getInt(5));
-                fc.setCodigoEmpleado(rs.getInt(6));
+                f.setNumeroFactura(rs.getInt(1));
+                f.setEstado(rs.getString(2));
+                f.setTotalFactura(rs.getDouble(3));
+                f.setFechaFactura(rs.getString(4));
+                f.setCodigoCliente(rs.getInt(5));
+                f.setCodigoEmpleado(rs.getInt(6));
             }
-        } catch(Exception e){
+        }catch(Exception e){
             e.printStackTrace();
         }
         
-        return fc;
+        return f;
     }
     
-    //Método Actualizar
-    public int actualizar(Factura fc){
-        String sql = "Update Factura set estado = ?,"
-                + "totalFactura = ?, fechaFactura = ?,"
-                + "where numeroFactura = ?";
+    //MÉTODO EDITAR
+    public int actualizar(Factura fact){
+        String sql = "update Factura set estado = ?, totalFactura = ?, fechaFactura = ? where numeroFactura = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setString(1, fc.getEstado());
-            ps.setDouble(2, fc.getTotalFactura());
-            ps.setDate(3, (Date)fc.getFechaFactura());
+            ps.setString(1, fact.getEstado());
+            ps.setDouble(2, fact.getTotalFactura());
+            ps.setString(3, fact.getFechaFactura());
+            ps.setInt(4, fact.getNumeroFactura());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
+        
         return resp;
     }
     
-    //Método Eliminar
-    public void eliminar(int numFactura){
-        String sql = "Delete from factura where numeroFactura = " + numFactura;
+    //MÉTODO ELIMINAR
+    public void eliminar (int id){
+        String sql = "delete from factura where numeroFactura = "+id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
 }
+

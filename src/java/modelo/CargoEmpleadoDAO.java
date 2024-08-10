@@ -1,29 +1,23 @@
 package modelo;
-
+ 
 import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
+ 
+ 
 public class CargoEmpleadoDAO {
-    
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
     int resp;
-    
     //Elementos del CRUD
-    
     public List listar(){
-    
         String sql = "select * from cargoEmpleado";
         List<CargoEmpleado> listaCargoEmpleado = new ArrayList<>();
-        
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -38,15 +32,10 @@ public class CargoEmpleadoDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
         return listaCargoEmpleado;
-    
     }
-    
     public int agregar(CargoEmpleado cargoEmpleado){
-    
         String sql = "insert into CargoEmpleado(nombreCargo, descripcionCargo) values(?,?)";
-        
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -55,15 +44,11 @@ public class CargoEmpleadoDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
         return resp;
     }
-    
     public CargoEmpleado listarCodigoCargoEmpleado(int id){
-    
         CargoEmpleado cargoEmpleado = new CargoEmpleado();
         String sql = "select * from CargoEmpleado where codigoCargoEmpleado =" + id;
-        
         try{
             con  = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -75,15 +60,10 @@ public class CargoEmpleadoDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
         return cargoEmpleado;
-        
     }
-    
     public int actualizar(CargoEmpleado cargo){
-        
         String sql = "Update cargoEmpleado set descripcionCargo = ?, nombreCargo = ? where codigoCargoEmpleado = ?";
-        
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -94,15 +74,10 @@ public class CargoEmpleadoDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
         return resp;
-        
     }
-    
     public void eliminar(int id){
-        
         String sql = "delete from cargoEmpleado where codigoCargoEmpleado =" + id;
-        
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -110,7 +85,5 @@ public class CargoEmpleadoDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
     }
-    
 }
