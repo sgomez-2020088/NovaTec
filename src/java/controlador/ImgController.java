@@ -12,18 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.EmpleadoDAO;
 import modelo.ProductoDAO;
 
 /**
  *
- * @author Usuario
+ * @author Sergio
  */
-@WebServlet(name = "ImageController", urlPatterns = {"/ImageController"})
-public class ImageController extends HttpServlet {
-    EmpleadoDAO emplDao = new EmpleadoDAO();
-    
-
+@WebServlet(name = "ImgController", urlPatterns = {"/ImgController"})
+public class ImgController extends HttpServlet {
+    ProductoDAO prodDao = new ProductoDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +38,10 @@ public class ImageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ImageController</title>");            
+            out.println("<title>Servlet ImgController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ImageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ImgController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,11 +59,9 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        emplDao.listarImagen(id, response);
         
-       
-//        
+        int idp = Integer.parseInt(request.getParameter("idp"));
+        prodDao.listarImagen(idp,response);
     }
 
     /**

@@ -1,62 +1,48 @@
-<%-- 
-    Document   : Productos
-    Created on : 12/07/2024, 09:52:19 PM
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Página Productos</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">    </head>
-
+        <link href="style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="d-flex">
             <div class="card col-sm-4">
                 <div class="card-body">
                     
-                    <form action="Controlador?menu=Producto" method="POST">
+                    <form action="Controlador?menu=Producto" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label><strong>Codigo:</strong></label>
-                            <input type="text" value="" name="txtCodigoProducto" class="form-control">
+                            <input type="text" value="${producto.getCodigoProducto()}" name="txtCodigoProducto" class="form-control">
                         </div>
                         <div class="form-group">
                             <label><strong>Descripcion:</strong></label>
-                            <input type="text" value="" name="txtDescripcionProducto" class="form-control">
+                            <input type="text" value="${producto.getDescripcionProducto()}" name="txtDescripcionProducto" class="form-control">
                         </div>
                         <div class="form-group">
                             <label><strong>Precio Unitario:</strong></label>
-                            <input type="text" value="" name="txtPrecioUnitario" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Precio Docena:</strong></label>
-                            <input type="text" value="" name="txtPrecioDocena" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Precio Mayor:</strong></label>
-                            <input type="text" value="" name="txtPrecioMayor" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Imagen:</strong></label>
-                            <input type="text" value="" name="txtImagenProducto" class="form-control">
+                            <input type="text" value="${producto.getPrecioUnitario()}" name="txtPrecioUnitario" class="form-control">
                         </div>
                         <div class="form-group">
                             <label><strong>Existencia:</strong></label>
-                            <input type="text" value="" name="txtExistencia" class="form-control">
+                            <input type="text" value="${producto.getExistencia()}" name="txtExistencia" class="form-control">
                         </div>
                         <div class="form-group">
                             <label><strong>Codigo TipoProducto:</strong></label>
-                            <input type="text" value="" name="txtCdigoTipoProducto" class="form-control">
+                            <input type="text" value="${producto.getCodigoTipoProducto()}" name="txtCodigoTipoProducto" class="form-control">
                         </div>
                         <div class="form-group">
                             <label><strong>Codigo Proveedor:</strong></label>
-                            <input type="text" value="" name="txtCodigoProveedor" class="form-control">
+                            <input type="text" value="${producto.getCodigoProveedor()}" name="txtCodigoProveedor" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                        <hr>
+                        <input type="file" name="imagenProducto1" value="Subir" class="btn btn-success">
                     </form>
                 </div>
             </div>
@@ -65,11 +51,9 @@
                     <thead>
                         <tr>
                             <th>CODIGO</th>
+                            <th>IMAGEN</th>
                             <th>DESCRIPCION</th>
                             <th>PRECIO UNI</th>
-                            <th>PRECIO DOCE</th>
-                            <th>PRECIO MAY</th>
-                            <th>IMAGEN</th>
                             <th>EXISTENCIA</th>
                             <th>COD.TIPOPRODUCTO</th>
                             <th>COD.PROVEEDOR</th>
@@ -79,19 +63,17 @@
                     <tbody>
                         <c:forEach var="producto" items="${productos}">
                         <tr>
-                            <td>${Producto.getCodigoProducto()}</td>
-                            <td>${Producto.getDescripcionProducto()}</td>
-                            <td>${Producto.getPrecioUnitario()}</td>
-                            <td>${Producto.getPrecioDocena()}</td>
-                            <td>${Producto.getPrecioMayor()}</td>
-                            <td>${Producto.getImagenProducto()}</td>
-                            <td>${Producto.getExistencia()}</td>
-                            <td>${Producto.getCodigoTipoProducto()}</td>
-                            <td>${Producto.getCodigoTipoProveedor()}</td>
+                            <td>${producto.getCodigoProducto()}</td>
+                             <td><img src="ImgController?idp=${producto.getCodigoProducto()}" width="100" height="100" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img/produ.jpg;'"></td>
+                            <td>${producto.getDescripcionProducto()}</td>
+                            <td>${producto.getPrecioUnitario()}</td>
+                            <td>${producto.getExistencia()}</td>
+                            <td>${producto.getCodigoTipoProducto()}</td>
+                            <td>${producto.getCodigoProveedor()}</td>
 
                             <td>
-                                <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&codigoProducto=">Editar</a>
-                                <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Eliminar&codigoProducto=">Eliminar</a>
+                                <a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&codigoProducto=${producto.getCodigoProducto()}">Editar</a>
+                                <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Eliminar&codigoProducto=${producto.getCodigoProducto()}">Eliminar</a>
                             </td>
                         </tr>
                         </c:forEach>

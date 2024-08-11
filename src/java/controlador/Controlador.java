@@ -28,6 +28,8 @@ import modelo.EmailProveedor;
 import modelo.EmailProveedorDAO;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
+import modelo.Producto;
+import modelo.ProductoDAO;
 import modelo.Proveedores;
 import modelo.ProveedoresDAO;
 import modelo.TelefonoProveedor;
@@ -35,10 +37,7 @@ import modelo.TelefonoProveedorDAO;
 import modelo.TipoProducto;
 import modelo.TipoProductoDAO;
 
-/**
- *
- * @author informatica
- */
+
 @MultipartConfig
 public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
@@ -59,9 +58,13 @@ public class Controlador extends HttpServlet {
     DetalleCompraDAO detalleCompraDao = new DetalleCompraDAO();
     CargoEmpleado cargoEmpleado = new CargoEmpleado();
     CargoEmpleadoDAO cargoEmpleadoDao = new CargoEmpleadoDAO();
+    Producto producto = new Producto();
+    ProductoDAO productoDao = new ProductoDAO();
+
     int numeroDocumento;
     int codTipoProducto, codProveedores, codEmailProveedor, codTelefonoProveedor, codDetalleCompra, codCargoEmpleado, codEmpleado; 
     int codClientes;
+    String codProducto;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -78,6 +81,8 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion"); 
         if(menu.equals("Principal")){
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
+        }else if(menu.equals("Home")) {
+            request.getRequestDispatcher("Home.jsp").forward(request, response);
         }else if(menu.equals("TipoProducto")) {
             switch(accion){
                 case"Listar":
@@ -282,16 +287,19 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
+                    
                     String nom = request.getParameter("txtNombreCargo");
                     String desc = request.getParameter("txtDescripcionCargo");
 
                     cargoEmpleado.setNombreCargo(nom);
                     cargoEmpleado.setDescripcionCargo(desc);
+                    cargoEmpleado.setCodigoCargoEmpleado(codCargoEmpleado);
+                    cargoEmpleadoDao.actualizar(cargoEmpleado);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
 
                 case "Eliminar":
-                    codCargoEmpleado = Integer.parseInt(request.getParameter("txtCodigoCargoEmpleado"));
+                    codCargoEmpleado = Integer.parseInt(request.getParameter("codigoCargoEmpleado"));
                     cargoEmpleadoDao.eliminar(codCargoEmpleado);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
@@ -341,6 +349,78 @@ public class Controlador extends HttpServlet {
             }
             request.getRequestDispatcher("TelefonoProveedor.jsp").forward(request, response);
         }else if(menu.equals("Producto")) {
+            switch(accion){
+                case"Listar":
+                    List listaProductos = productoDao.listar();
+                    request.setAttribute("productos", listaProductos);
+                break;
+                case "Agregar":
+                    String codiProducto = request.getParameter("txtCodigoProducto");
+                    String descriProducto = request.getParameter("txtDescripcionProducto");
+                    double preciUnitario = Double.parseDouble(request.getParameter("txtPrecioUnitario")) ;
+                    int exist = Integer.parseInt(request.getParameter("txtExistencia")) ;
+                    int codiTipoProducto = Integer.parseInt(request.getParameter("txtCodigoTipoProducto"));
+                    int codiProveedor = Integer.parseInt(request.getParameter("txtCodigoProveedor"));
+                    
+                    Part part = request.getPart("imagenProducto1");
+                    InputStream inputStream = part.getInputStream();
+                    
+            
+                    producto.setCodigoProducto(codiProducto);
+                    producto.setDescripcionProducto(descriProducto);
+                    producto.setPrecioUnitario(preciUnitario);
+                    producto.setExistencia(exist);
+                    producto.setCodigoTipoProducto(codiTipoProducto);
+                    producto.setCodigoProveedor(codiProveedor);
+                    
+                    if(part !=null && part.getSize()>0){
+                        producto.setImagenProducto(inputStream);
+                     }else{
+                         producto.setImagenProducto(null);
+                    }
+                    
+                    productoDao.agregar(producto);
+                    request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    
+                    
+                    codProducto = request.getParameter("codigoProducto");
+                    Producto t = productoDao.listarCodigoProducto(codProducto);
+                    request.setAttribute("producto", t);
+                    request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String descripcionProductoA = request.getParameter("txtDescripcionProducto");
+                    double precioUnitarioA = Double.parseDouble(request.getParameter("txtPrecioUnitario"));
+                    int existenciaA = Integer.parseInt(request.getParameter("txtExistencia"));
+                    
+                    Part parte = request.getPart("imagenProducto1");
+                    InputStream inputSt = parte.getInputStream();
+                    
+                    producto.setDescripcionProducto(descripcionProductoA);
+                    producto.setPrecioUnitario(precioUnitarioA);
+                    producto.setExistencia(existenciaA);
+                    producto.setCodigoProducto(codProducto);
+                    
+                    if(parte !=null && parte.getSize()>0){
+                         producto.setImagenProducto(inputSt);
+                    }else{
+                        Producto productoExistente = productoDao.listarCodigoProducto(codProducto);
+                        producto.setImagenProducto(productoExistente.getImagenProducto());
+                    }
+                    
+                    productoDao.actualizar(producto);
+                    request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codProducto = request.getParameter("codigoProducto");
+                    productoDao.eliminar(codProducto);
+                    request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+                    break;
+            }
+
+
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }else if(menu.equals("DetalleCarrito")) {
             request.getRequestDispatcher("DetalleCarrito.jsp").forward(request, response);
@@ -525,11 +605,10 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=DetalleCompra&accion=Listar").forward(request, response);
                 
                 break;
-            }
+            }   
             
             request.getRequestDispatcher("DetalleCompra.jsp").forward(request, response);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

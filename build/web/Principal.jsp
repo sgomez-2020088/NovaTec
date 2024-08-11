@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Principal
-    Created on : 10/07/2024, 08:25:51 AM
-    Author     : informatica
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,9 +13,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Home</a> 
-                    </li>
-                    
+<a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Home&accion=Listar">Home<span class="sr-only">(current)</span></a>
+                    </li>  
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Proveedores&accion=Listar" target="myFrame">Proveedores</a>
                     </li>
@@ -30,7 +24,6 @@
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=EmailProveedor&accion=Listar" target="myFrame">Email Prov</a>
                     </li>
-                    
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Clientes&accion=Listar" target="myFrame">Clientes</a>
                     </li>
@@ -52,8 +45,6 @@
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Compra&accion=Listar" target="myFrame">Compras</a>
                     </li>
-                   
-                    
                     <li class="nav-item">
                         <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="Controlador?menu=Factura&accion=Listar" target="myFrame">Factura</a>
                     </li>
@@ -75,7 +66,7 @@
                         <img src="img/User.png" alt="60" width="60"/>
                     </a>
                     <a class="dropdown-item">${usuario.getUsuario()}</a>
-                    <a class="dropdown-item">usuario@gmail.com</a>
+                    <a class="dropdown-item">${usuario.getDPIEmpleado()}</a>
                     <div class="dropdown-divider"></div>
                     <form action="Validar" method="POST">
                         <button name="accion" name="Salir" class="dropdown-item">Salir</button>
@@ -83,8 +74,8 @@
                 </div>
             </div>
         </nav>
-                    <div class="m-4" style="height: 665px">
-                        <iframe name="myFrame" style="height:100%; width: 100%; border: none"></iframe>
+                    <div class="m-4" style="height: 1200px">
+                        <iframe name="myFrame" src="Home.jsp"  style="height:100%; width: 100%; border: none"></iframe>
                     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

@@ -68,14 +68,14 @@ public class CargoEmpleadoDAO {
         }
         return cae;
     }
-    public int actualizar(CargoEmpleado cargo){
+    public int actualizar(CargoEmpleado cae){
         String sql = "Update cargoEmpleado set nombreCargo = ?, descripcionCargo = ? where codigoCargoEmpleado = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
-            ps.setString(1, cargo.getNombreCargo());
-            ps.setString(2, cargo.getDescripcionCargo());
-            ps.setInt(3, cargo.getCodigoCargoEmpleado());
+            ps.setString(1, cae.getNombreCargo());
+            ps.setString(2, cae.getDescripcionCargo());
+            ps.setInt(3, cae.getCodigoCargoEmpleado());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();

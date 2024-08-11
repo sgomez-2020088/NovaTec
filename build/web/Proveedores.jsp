@@ -9,6 +9,7 @@
     <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <h1>Proveedores</h1>
     <div class="d-flex">
         <div class="card col-sm-4">
             <div class="card-body"> 

@@ -183,8 +183,11 @@ insert into TipoProducto(descripcion) values('Monitores');
 insert into TipoProducto(descripcion) values('Ordenadores');
 
 
+insert into Productos(codigoProducto,descripcionProducto, precioUnitario, imagenProducto, existencia, codigoTipoProducto, codigoProveedor) values('COD01','gg',100,'',1,1,1);
+insert into Productos(codigoProducto,descripcionProducto, precioUnitario, imagenProducto, existencia, codigoTipoProducto, codigoProveedor) values('COD02','gg2',102,'',1,1,1);
+insert into Productos(codigoProducto,descripcionProducto, precioUnitario, imagenProducto, existencia, codigoTipoProducto, codigoProveedor) values('COD03','gg3',103,'',1,1,1);
 
-/*
+
 insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(123,2,'COD01',2024001);
 insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(252,13,'COD01',2024001);
 

@@ -85,6 +85,7 @@ public class DetalleCompraDAO {
             ps = con.prepareStatement(sql);
             ps.setDouble(1, dtc.getCostoUnitario());
             ps.setInt(2, dtc.getCantidad());
+            ps.setInt(3, dtc.getCodigoDetalleCompra());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();

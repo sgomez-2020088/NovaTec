@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Edu+VIC+WA+NT+Beginner:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&display=swap');
+body {
+    background: linear-gradient(135deg, #002244 0%, #1c6ea4 100%);
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.5s ease;
+}
+
+.hero {
+    background-color: rgba(0, 34, 68, 0.9);
+    color: #ffffff;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: background-color 0.5s ease;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: slideIn 1.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    max-width: 80%;
+}
+
+h2 {
+    color: #ffffff;
+    font-family: 'Edu VIC WA NT Beginner', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+
+.hero h1 {
+    font-family: 'Bebas Neue', serif;
+    font-size: 4rem; 
+    margin: 0;
+    background: linear-gradient(to right, #003366, #1a75ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    animation: fadeIn 2s ease-out;
+    transition: transform 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.hero h1:hover {
+    transform: scale(1.05);
+    letter-spacing: 2px;
+}
+
+.content {
+    font-family: 'Lato', sans-serif;
+    padding: 30px;
+    background-image: url('img/fondoEntidad.png'); 
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.5s ease;
+    animation: fadeInUp 1s ease-out;
+}
+
+.card {
+    border: 1px solid #002244;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    animation: fadeInUp 1.5s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.card:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    background-color: #e0efff; /* Color de fondo al pasar el mouse */
+}
+
+.card-title {
+    color: #002244;
+    font-family: 'Edu VIC WA NT Beginner', sans-serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    animation: fadeIn 2s ease-out;
+}
+
+.card-text {
+    color: #555;
+    font-family: 'Edu VIC WA NT Beginner', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    animation: fadeIn 2s ease-out;
+}
+
+.card-body {
+    background-color: #f0f8ff;
+    padding: 20px;
+    transition: background-color 0.5s ease;
+}
+
+.navbar {
+    background-color: #002244;
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.navbar a {
+    color: #ffffff;
+    font-family: 'Edu VIC WA NT Beginner', sans-serif;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #f0f8ff;
+    text-decoration: underline;
+}
+
+.hero img {
+    margin-left: 20px;
+    height: 250px; 
+    border-radius: 8px;
+   
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

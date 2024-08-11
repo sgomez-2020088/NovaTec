@@ -59,26 +59,26 @@
             </div>
             <div class="col-sm-8">
                 <table class="table table-hover">
-    <thead>
-        <tr>
-            <th>CÓDIGO</th>
-            <th>FOTO</th>
-            <th>NOMBRES</th>
-            <th>APELLIDOS</th>
-            <th>DPI</th>
-            <th>SUELDO</th>
-            <th>DIRECCIÓN</th>
-            <th>USUARIO</th>
-            <th>TRUNO</th>
-            <th>COD.CARGO EMPLEADO</th>
-            <th>ACCIONES</th>
-        </tr>
-    </thead>
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>FOTO</th>
+                            <th>NOMBRES</th>
+                            <th>APELLIDOS</th>
+                            <th>DPI</th>
+                            <th>SUELDO</th>
+                            <th>DIRECCIÓN</th>
+                            <th>USUARIO</th>
+                            <th>TRUNO</th>
+                            <th>COD.CARGO EMPLEADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
     <tbody>
         <c:forEach var="empleado" items="${empleados}">
             <tr>
                 <td>${empleado.getCodigoEmpleado()}</td>
-                <td><img src="ImageController?id=${empleado.getCodigoEmpleado()}" width="100" height="100" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img/novatec.png;'"></td>
+                <td><img src="ImageController?id=${empleado.getCodigoEmpleado()}" width="100" height="100" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img/user.png;'"></td>
                 <td>${empleado.nombresEmpleado}</td>
                 <td>${empleado.apellidosEmpleado}</td>
                 <td>${empleado.DPIEmpleado}</td>
