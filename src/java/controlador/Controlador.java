@@ -7,12 +7,15 @@ package controlador;
 
 import static java.awt.SystemColor.menu;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.CargoEmpleado;
 import modelo.CargoEmpleadoDAO;
 import modelo.Cliente;
@@ -36,6 +39,7 @@ import modelo.TipoProductoDAO;
  *
  * @author informatica
  */
+@MultipartConfig
 public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDao = new EmpleadoDAO();
@@ -263,27 +267,20 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("cargoEmpleados", listaCargoEmpleados);
                     break;
 
-                case "Agregar":
-                    
-                    
+                case "Agregar":                  
                     String nombre = request.getParameter("txtNombreCargo");
                     String descripcion = request.getParameter("txtDescripcionCargo");
-
                     cargoEmpleado.setNombreCargo(nombre);
                     cargoEmpleado.setDescripcionCargo(descripcion);
+                    cargoEmpleadoDao.agregar(cargoEmpleado);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
-
                 case "Editar":
-                    
-                    
-                    
                     codCargoEmpleado = Integer.parseInt(request.getParameter("codigoCargoEmpleado"));
                     CargoEmpleado ce = cargoEmpleadoDao.listarCodigoCargoEmpleado(codCargoEmpleado);
                     request.setAttribute("cargoEmpleado", ce);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
-
                 case "Actualizar":
                     String nom = request.getParameter("txtNombreCargo");
                     String desc = request.getParameter("txtDescripcionCargo");
@@ -294,8 +291,6 @@ public class Controlador extends HttpServlet {
                     break;
 
                 case "Eliminar":
-                    
-                    
                     codCargoEmpleado = Integer.parseInt(request.getParameter("txtCodigoCargoEmpleado"));
                     cargoEmpleadoDao.eliminar(codCargoEmpleado);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
@@ -397,9 +392,8 @@ public class Controlador extends HttpServlet {
         }else if(menu.equals("Empleados")) {
             switch(accion){
             case "Listar":
-                    List<Empleado> listaEmpleado = empleadoDao.listar();
+                    List listaEmpleado = empleadoDao.listar();
                     request.setAttribute("empleados", listaEmpleado);
-                    request.getRequestDispatcher("Empleados.jsp").forward(request, response);
                     break;
                 case "Agregar":
                     String nombres = request.getParameter("txtNombresEmpleado");
@@ -409,7 +403,12 @@ public class Controlador extends HttpServlet {
                     String direccion = request.getParameter("txtDireccionEmpleado");
                     String usuario = request.getParameter("txtUsuario");
                     String turno = request.getParameter("txtTurno");
-                    codCargoEmpleado = Integer.parseInt(request.getParameter("txtCodigoCargoEmpleado"));
+                    //codCargoEmpleado = Integer.parseInt(request.getParameter("txtCodigoCargoEmpleado"));
+                    String tipoCargoEmpleado = request.getParameter("txtCodigoCargoEmpleado");
+
+                    Part part = request.getPart("imagenEmpleado");
+                    InputStream inputStream = part.getInputStream();
+ 
                     empleado.setNombresEmpleado(nombres);
                     empleado.setApellidosEmpleado(apellidos);
                     empleado.setDPIEmpleado(DPI);
@@ -417,7 +416,17 @@ public class Controlador extends HttpServlet {
                     empleado.setDireccionEmpleado(direccion);
                     empleado.setUsuario(usuario);
                     empleado.setTurno(turno);
-                    empleado.setCodigoCargoEmpleado(codCargoEmpleado);
+                    //empleado.setCodigoCargoEmpleado(codCargoEmpleado);
+                    empleado.setCodigoCargoEmpleado(Integer.parseInt(tipoCargoEmpleado));
+  
+                    
+                    if(part !=null && part.getSize()>0){
+                        empleado.setImgEmpleado(inputStream);
+                    }else{
+                        empleado.setImgEmpleado(null);
+                    }
+                    
+                    
                     empleadoDao.agregar(empleado);
                     request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                     break;
@@ -428,29 +437,38 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
-                  
-                    
-                    
-                    
-                    
-                    String nombresEmp = request.getParameter("txtNombresEmpleado");
-                    String apellidosEmp = request.getParameter("txtApellidosEmpleado");
-                    String DPIEmp = request.getParameter("txtDPIEmpleado");
-                    Double suelEmp = Double.parseDouble(request.getParameter("txtSueldo"));
-                    String direccEmp = request.getParameter("txtDireccionEmpleado");
-                    String userEmp = request.getParameter("txtUsuario");
-                    String turnEmp = request.getParameter("txtTurno");
-                    empleado.setNombresEmpleado(nombresEmp);
-                    empleado.setApellidosEmpleado(apellidosEmp);
-                    empleado.setDPIEmpleado(DPIEmp);
-                    empleado.setSueldo(suelEmp);
-                    empleado.setDireccionEmpleado(direccEmp);
-                    empleado.setUsuario(userEmp);
-                    empleado.setTurno(turnEmp);
+                    String nomb = request.getParameter("txtNombresEmpleado");
+                    String apell = request.getParameter("txtApellidosEmpleado");
+                    String DPIEm = request.getParameter("txtDPIEmpleado");
+                    Double suel = Double.parseDouble(request.getParameter("txtSueldo"));
+                    String direc = request.getParameter("txtDireccionEmpleado");
+                    String usu = request.getParameter("txtUsuario");
+                    String tur = request.getParameter("txtTurno");
+
+                    Part parte = request.getPart("imagenEmpleado");
+                    InputStream inputSt = parte.getInputStream();
+ 
+                    empleado.setNombresEmpleado(nomb);
+                    empleado.setApellidosEmpleado(apell);
+                    empleado.setDPIEmpleado(DPIEm);
+                    empleado.setSueldo(suel);
+                    empleado.setDireccionEmpleado(direc);
+                    empleado.setUsuario(usu);
+                    empleado.setTurno(tur);
+                    //empleado.setCodigoCargoEmpleado(codCargoEmpleado);
                     empleado.setCodigoEmpleado(codEmpleado);
+  
+                    
+                    if(parte !=null && parte.getSize()>0){
+                        empleado.setImgEmpleado(inputSt);
+                    }else{
+                        Empleado empleadoExistente = empleadoDao.listarCodigoEmpleado(codEmpleado);
+                        empleado.setImgEmpleado(empleadoExistente.getImgEmpleado());
+                    }
+                    
+                    
                     empleadoDao.actualizar(empleado);
                     request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
-                    break;
                 case "Eliminar":
                     codEmpleado = Integer.parseInt(request.getParameter("codigoEmpleado"));
                     empleadoDao.eliminar(codEmpleado);

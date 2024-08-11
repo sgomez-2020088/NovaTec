@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.InputStream;
+
 public class Empleado {
   private int codigoEmpleado;
   private String nombresEmpleado;
@@ -10,11 +12,12 @@ public class Empleado {
   private String usuario;
   private String turno;
   private int codigoCargoEmpleado;
+  private InputStream imgEmpleado;
 
     public Empleado() {
     }
 
-    public Empleado(int codigoEmpleado, String nombresEmpleado, String apellidosEmpleado, String DPIEmpleado, double sueldo, String direccionEmpleado, String usuario, String turno, int codigoCargoEmpleado) {
+    public Empleado(int codigoEmpleado, String nombresEmpleado, String apellidosEmpleado, String DPIEmpleado, double sueldo, String direccionEmpleado, String usuario, String turno, int codigoCargoEmpleado, InputStream imgEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
         this.nombresEmpleado = nombresEmpleado;
         this.apellidosEmpleado = apellidosEmpleado;
@@ -24,6 +27,7 @@ public class Empleado {
         this.usuario = usuario;
         this.turno = turno;
         this.codigoCargoEmpleado = codigoCargoEmpleado;
+        this.imgEmpleado = imgEmpleado;
     }
 
     public int getCodigoEmpleado() {
@@ -97,8 +101,15 @@ public class Empleado {
     public void setCodigoCargoEmpleado(int codigoCargoEmpleado) {
         this.codigoCargoEmpleado = codigoCargoEmpleado;
     }
-  
-  
+
+    public InputStream getImgEmpleado() {
+        return imgEmpleado;
+    }
+
+    public void setImgEmpleado(InputStream imgEmpleado) {
+        this.imgEmpleado = imgEmpleado;
+    }
     
     
+
 }

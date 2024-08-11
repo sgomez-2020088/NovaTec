@@ -55,15 +55,16 @@ public class EmpleadoDAO {
             rs = ps.executeQuery();
             while(rs.next()){
                 Empleado em = new Empleado();
-                em.setCodigoEmpleado(rs.getInt("codigoEmpleado"));
-                em.setNombresEmpleado(rs.getString("nombresEmpleado"));
-                em.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
-                em.setDPIEmpleado(rs.getString("DPIEmpleado"));
-                em.setSueldo(rs.getDouble("sueldo"));
-                em.setDireccionEmpleado(rs.getString("direccionEmpleado"));
-                em.setUsuario(rs.getString("usuario"));
-                em.setTurno(rs.getString("turno"));
-                em.setCodigoCargoEmpleado(rs.getInt("codigoCargoEmpleado")); // Asegúrate de que esto es correcto
+                em.setCodigoEmpleado(rs.getInt(1));
+                em.setNombresEmpleado(rs.getString(2));
+                em.setApellidosEmpleado(rs.getString(3));
+                em.setDPIEmpleado(rs.getString(4));
+                em.setSueldo(rs.getDouble(5));
+                em.setDireccionEmpleado(rs.getString(6));
+                em.setUsuario(rs.getString(7));
+                em.setTurno(rs.getString(8));
+                em.setImgEmpleado(rs.getBinaryStream(9));
+                em.setCodigoCargoEmpleado(rs.getInt(10)); // Asegúrate de que esto es correcto
                 listaEmpleado.add(em);
             }
         }catch(Exception e){
@@ -74,7 +75,7 @@ public class EmpleadoDAO {
    
     //AGREGAR
     public int agregar(Empleado emp){
-        String sql = "insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, imgEmpleado, codigoCargoEmpleado) values(?,?,?,?,?,?,?,?,?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -85,7 +86,8 @@ public class EmpleadoDAO {
             ps.setString(5, emp.getDireccionEmpleado());
             ps.setString(6, emp.getUsuario());
             ps.setString(7, emp.getTurno());
-            ps.setInt(8, emp.getCodigoCargoEmpleado());
+            ps.setBlob(8, emp.getImgEmpleado());
+            ps.setInt(9, emp.getCodigoCargoEmpleado());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
@@ -103,15 +105,16 @@ public class EmpleadoDAO {
             rs = ps.executeQuery();
             while(rs.next()){
                 
-                emp.setCodigoEmpleado(rs.getInt("codigoEmpleado"));
-                emp.setNombresEmpleado(rs.getString("nombresEmpleado"));
-                emp.setApellidosEmpleado(rs.getString("apellidosEmpleado"));
-                emp.setDPIEmpleado(rs.getString("DPIEmpleado"));
-                emp.setSueldo(rs.getDouble("sueldo"));
-                emp.setDireccionEmpleado(rs.getString("direccionEmpleado"));
-                emp.setUsuario(rs.getString("usuario"));
-                emp.setTurno(rs.getString("turno"));
-                emp.setCodigoCargoEmpleado(rs.getInt("codigoCargoEmpleado")); // Asegúrate de que esto es correcto
+                emp.setCodigoEmpleado(rs.getInt(1));
+                emp.setNombresEmpleado(rs.getString(2));
+                emp.setApellidosEmpleado(rs.getString(3));
+                emp.setDPIEmpleado(rs.getString(4));
+                emp.setSueldo(rs.getDouble(5));
+                emp.setDireccionEmpleado(rs.getString(6));
+                emp.setUsuario(rs.getString(7));
+                emp.setTurno(rs.getString(8));
+                emp.setImgEmpleado(rs.getBinaryStream(9));
+                emp.setCodigoCargoEmpleado(rs.getInt(10)); // Asegúrate de que esto es correcto
 
             }
         }catch(Exception e){
@@ -120,9 +123,37 @@ public class EmpleadoDAO {
         return emp;
     }
     
+    // LISTAR IMAGEN
+    public void listarImagen(int id, HttpServletResponse response){
+        String sql = "Select imgEmpleado from Empleados where codigoEmpleado="+id;
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        
+        try{
+            outputStream = response.getOutputStream();
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                inputStream = rs.getBinaryStream("imgEmpleado");
+            }
+            bufferedInputStream = new BufferedInputStream(inputStream);
+            bufferedOutputStream = new BufferedOutputStream(outputStream);
+            int i=0;
+            while((i=bufferedInputStream.read())!=-1){
+                bufferedOutputStream.write(i);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     //MÉTODO EDITAR
     public int actualizar(Empleado emp){
-        String sql = "update Empleados set nombresEmpleado = ?, apellidosEmpleado = ?, DPIEmpleado = ?, sueldo = ?, direccionEmpleado = ?, usuario = ?, turno = ? where codigoEmpleado = ?";
+        String sql = "update Empleados set nombresEmpleado = ?, apellidosEmpleado = ?, DPIEmpleado = ?, sueldo = ?, direccionEmpleado = ?, usuario = ?, turno = ?, imgEmpleado = ? where codigoEmpleado = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -133,7 +164,8 @@ public class EmpleadoDAO {
             ps.setString(5, emp.getDireccionEmpleado());
             ps.setString(6, emp.getUsuario());
             ps.setString(7, emp.getTurno());
-            ps.setInt(8, emp.getCodigoEmpleado());
+            ps.setBlob(8, emp.getImgEmpleado());
+            ps.setInt(9, emp.getCodigoEmpleado());
 
             ps.executeUpdate();
         }catch(Exception e){
@@ -141,7 +173,6 @@ public class EmpleadoDAO {
         }
         return resp;
     }
-    
     
   
     //ELIMINAR

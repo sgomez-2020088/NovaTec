@@ -17,7 +17,7 @@
         <div class="d-flex">
             <div class="card col-sm-4">
                 <div class="card-body">
-                    <form action="Controlador?menu=Empleados" method="POST" encrypte="multipart/form-data">
+                    <form action="Controlador?menu=Empleados" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label><strong>Nombres:</strong></label>
                             <input type="text" value="${empleado.getNombresEmpleado()}" name="txtNombresEmpleado" class="form-control">
@@ -52,6 +52,8 @@
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
+                        <hr>
+                        <input type="file" name="imagenEmpleado" value="Subir" class="btn btn-success">
                     </form>
                 </div>
             </div>
@@ -60,6 +62,7 @@
     <thead>
         <tr>
             <th>CÓDIGO</th>
+            <th>FOTO</th>
             <th>NOMBRES</th>
             <th>APELLIDOS</th>
             <th>DPI</th>
@@ -74,7 +77,8 @@
     <tbody>
         <c:forEach var="empleado" items="${empleados}">
             <tr>
-                <td>${empleado.codigoEmpleado}</td>
+                <td>${empleado.getCodigoEmpleado()}</td>
+                <td><img src="ImageController?id=${empleado.getCodigoEmpleado()}" width="100" height="100" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img/novatec.png;'"></td>
                 <td>${empleado.nombresEmpleado}</td>
                 <td>${empleado.apellidosEmpleado}</td>
                 <td>${empleado.DPIEmpleado}</td>

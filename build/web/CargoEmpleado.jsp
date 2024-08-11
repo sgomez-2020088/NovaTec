@@ -46,7 +46,8 @@
                         <td>${cargoEmpleado.getDescripcionCargo()}</td>
                         <td>
                             <a class="btn btn-warning" href="Controlador?menu=CargoEmpleado&accion=Editar&codigoCargoEmpleado=${cargoEmpleado.getCodigoCargoEmpleado()}">Editar</a>
-                            <a class="btn btn-danger" href="Controlador?menu=CargoEmpleado&accion=Eliminar&codigoCargoEmpleado=${cargoEmpleado.codigoCargoEmpleado}">Eliminar</a>
+                            <a class="btn btn-danger" href="Controlador?menu=CargoEmpleado&accion=Eliminar&codigoCargoEmpleado=${cargoEmpleado.getCodigoCargoEmpleado()}">Eliminar</a>
+
 
                             
 

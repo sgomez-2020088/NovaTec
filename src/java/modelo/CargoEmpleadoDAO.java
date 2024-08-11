@@ -69,7 +69,7 @@ public class CargoEmpleadoDAO {
         return cae;
     }
     public int actualizar(CargoEmpleado cargo){
-        String sql = "Update cargoEmpleado set descripcionCargo = ?, nombreCargo = ? where codigoCargoEmpleado = ?";
+        String sql = "Update cargoEmpleado set nombreCargo = ?, descripcionCargo = ? where codigoCargoEmpleado = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);

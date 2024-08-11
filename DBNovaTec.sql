@@ -177,15 +177,14 @@ insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, 
     insert into Empleados (nombresEmpleado, apellidosEmpleado, DPIEmpleado, sueldo, direccionEmpleado, usuario, turno, codigoCargoEmpleado) 
 	values ('Ricardo','Galindo','123',12000,'zona 3','yo','Nocturno',1);
     
- update Empleados set nombresEmpleado = 's', apellidosEmpleado = 's', DPIEmpleado = 1, sueldo = 1, direccionEmpleado = '1', usuario = '1', turno = '1' where codigoEmpleado = 4;  
+
     
-    
-    insert into TipoProducto(descripcion) values('Monitores');
+insert into TipoProducto(descripcion) values('Monitores');
 insert into TipoProducto(descripcion) values('Ordenadores');
 
 
 
-insert into Productos(codigoProducto, descripcionProducto, precioUnitario, imagenProducto, existencia,codigoTipoProducto,codigoProveedor) values ('COD01','noHay',100,'',2,1,1);
+/*
 insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(123,2,'COD01',2024001);
 insert into DetalleCompra(costoUnitario, cantidad, codigoProducto, numeroDocumento) values(252,13,'COD01',2024001);
 
