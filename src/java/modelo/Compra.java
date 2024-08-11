@@ -1,10 +1,8 @@
 package modelo;
 
-import java.util.Date;
-
 public class Compra {
     private int numeroDocumento;
-    private Date fechaDocumento;
+    private String fechaDocumento;
     private String descripcion;
     private Double totalDocumento;
 
@@ -12,7 +10,7 @@ public class Compra {
         
     }
 
-    public Compra(int numeroDocumento, Date fechaDocumento, String descripcion, Double totalDocumento) {
+    public Compra(int numeroDocumento, String fechaDocumento, String descripcion, Double totalDocumento) {
         this.numeroDocumento = numeroDocumento;
         this.fechaDocumento = fechaDocumento;
         this.descripcion = descripcion;
@@ -27,11 +25,11 @@ public class Compra {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public Date getFechaDocumento() {
+    public String getFechaDocumento() {
         return fechaDocumento;
     }
 
-    public void setFechaDocumento(Date fechaDocumento) {
+    public void setFechaDocumento(String fechaDocumento) {
         this.fechaDocumento = fechaDocumento;
     }
 
@@ -49,7 +47,5 @@ public class Compra {
 
     public void setTotalDocumento(Double totalDocumento) {
         this.totalDocumento = totalDocumento;
-    }
-    
-    
+    }  
 }

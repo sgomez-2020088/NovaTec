@@ -1,33 +1,34 @@
 package modelo;
 
+import java.io.InputStream;
+
 public class Producto {
-    private int codigoProducto;
+    private String codigoProducto;
     private String descripcionProducto;
     private double precioUnitario;
-    private double precioDocena;
-    private double precioMayor;
-    //private blob imagenProducto;
+    private InputStream imagenProducto;
     private int existencia;
+    private int codigoTipoProducto;
     private int codigoProveedor;
 
     public Producto() {
     }
 
-    public Producto(int codigoProducto, String descripcionProducto, double precioUnitario, double precioDocena, double precioMayor, int existencia, int codigoProveedor) {
+    public Producto(String codigoProducto, String descripcionProducto, double precioUnitario, InputStream imagenProducto, int existencia, int codigoTipoProducto, int codigoProveedor) {
         this.codigoProducto = codigoProducto;
         this.descripcionProducto = descripcionProducto;
         this.precioUnitario = precioUnitario;
-        this.precioDocena = precioDocena;
-        this.precioMayor = precioMayor;
+        this.imagenProducto = imagenProducto;
         this.existencia = existencia;
+        this.codigoTipoProducto = codigoTipoProducto;
         this.codigoProveedor = codigoProveedor;
     }
 
-    public int getCodigoProducto() {
+    public String getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(int codigoProducto) {
+    public void setCodigoProducto(String codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
@@ -47,20 +48,12 @@ public class Producto {
         this.precioUnitario = precioUnitario;
     }
 
-    public double getPrecioDocena() {
-        return precioDocena;
+    public InputStream getImagenProducto() {
+        return imagenProducto;
     }
 
-    public void setPrecioDocena(double precioDocena) {
-        this.precioDocena = precioDocena;
-    }
-
-    public double getPrecioMayor() {
-        return precioMayor;
-    }
-
-    public void setPrecioMayor(double precioMayor) {
-        this.precioMayor = precioMayor;
+    public void setImagenProducto(InputStream imagenProducto) {
+        this.imagenProducto = imagenProducto;
     }
 
     public int getExistencia() {
@@ -71,11 +64,21 @@ public class Producto {
         this.existencia = existencia;
     }
 
+    public int getCodigoTipoProducto() {
+        return codigoTipoProducto;
+    }
+
+    public void setCodigoTipoProducto(int codigoTipoProducto) {
+        this.codigoTipoProducto = codigoTipoProducto;
+    }
+
     public int getCodigoProveedor() {
         return codigoProveedor;
     }
 
     public void setCodigoProveedor(int codigoProveedor) {
         this.codigoProveedor = codigoProveedor;
-    }  
+    }
+
+    
 }

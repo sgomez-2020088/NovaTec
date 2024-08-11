@@ -10,7 +10,7 @@ public class Conexion {
         try{
             Class.forName("com.mysql.jdbc.Driver");
 //            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBNovaTec?useSSL=false", "IN5AM", "admin");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBNovaTec?useSSL=false", "root", "admin");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBNovaTec?useSSL=false", "IN5AM", "admin");
         }catch(Exception e){
             e.printStackTrace();
         }
